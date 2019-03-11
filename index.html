@@ -26,7 +26,18 @@
       <br><input type="button" onclick="requestPermission() ;" value="許可する">
     </div>
 
-
+    <script  type="application/javascript">
+      //Service Workerの読み込み
+       if('serviceWorker' in navigator){
+        navigator.serviceWorker
+         .register('firebase-messaging-sw.js')
+         .then(function(){
+           console.log('Service Worker Registered');
+        });
+     
+       }
+       </script>
+       
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
     <script>
       //FCMで取得したコードをコピー&ペーストする部分
@@ -81,16 +92,6 @@
         });
       }
   </script>
-    <script  type="application/javascript">
-      //Service Workerの読み込み
-       if('serviceWorker' in navigator){
-        navigator.serviceWorker
-         .register('firebase-messaging-sw.js')
-         .then(function(){
-           console.log('Service Worker Registered');
-        });
-     
-       }
-       </script>
+
   </body>
 </html>
