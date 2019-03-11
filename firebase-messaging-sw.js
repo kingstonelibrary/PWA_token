@@ -44,14 +44,14 @@ self.addEventListener("fetch", function(event) {
   );
 });
 
-importScripts("/__/firebase/4.10.0/firebase-app.js");
-importScripts("/__/firebase/4.10.0/firebase-messaging.js");
-importScripts("/__/firebase/init.js");
+// importScripts("/__/firebase/4.10.0/firebase-app.js");
+// importScripts("/__/firebase/4.10.0/firebase-messaging.js");
+// importScripts("/__/firebase/init.js");
 
-var messaging = firebase.messaging();
 
 importScripts("https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js");
+var messaging = firebase.messaging();
 
 firebase.initializeApp({
   messagingSenderId: "961587936477"
