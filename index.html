@@ -56,7 +56,7 @@
       const messaging = firebase.messaging();
       messaging.usePublicVapidKey("BPWCBg99aHovFOR5lL5HgCfUQzpMddA93M1ZRn_nQp621MfF_HMuyxyrhHG1yurJpYYY0PQ2-yFDOkjSQwBNa_c");
       messaging.requestPermission();
-
+      var serviceWorker = navigator.serviceWorker;
       serviceWorker.register('firebase-messaging-sw.js').then(() => {
           return serviceWorker.ready;
       }).then(regist => {
