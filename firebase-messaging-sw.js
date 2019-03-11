@@ -47,18 +47,23 @@ self.addEventListener("fetch", function(event) {
 
 
 
-importScripts("/__/firebase/4.10.0/firebase-app.js");
-importScripts("/__/firebase/4.10.0/firebase-messaging.js");
-importScripts("/__/firebase/init.js");
-
-var messaging = firebase.messaging();
-
+// importScripts("/__/firebase/4.10.0/firebase-app.js");
+// importScripts("/__/firebase/4.10.0/firebase-messaging.js");
+// importScripts("/__/firebase/init.js");
 importScripts("https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js");
 
-firebase.initializeApp({
-  messagingSenderId: "<送信者ID>"
-});
+var config = {
+  apiKey: "AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg",
+  authDomain: "gcmproject-141802.firebaseapp.com",
+  databaseURL: "https://gcmproject-141802.firebaseio.com",
+  projectId: "gcmproject-141802",
+  storageBucket: "gcmproject-141802.appspot.com",
+  messagingSenderId: "961587936477"
+};
+
+firebase.initializeApp(config);
+var messaging = firebase.messaging();
 
 self.addEventListener("push", function(event) {
   //送られたプッシュ通知の本文を表示
