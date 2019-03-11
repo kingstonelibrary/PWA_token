@@ -7,11 +7,6 @@
         "src": "iconV2.png",
         "sizes": "61x60",
         "type": "image/png"
-    },
-    {
-        "src": "iconV2_144.png",
-        "sizes": "144x144",
-        "type": "image/png"
     }
   ],
   "start_url": " https://kingstonelibrary.github.io/PWA_token/",

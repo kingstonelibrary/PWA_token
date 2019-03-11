@@ -44,23 +44,7 @@ self.addEventListener("fetch", function(event) {
   );
 });
 
-// importScripts("/__/firebase/4.10.0/firebase-app.js");
-// importScripts("/__/firebase/4.10.0/firebase-messaging.js");
-// importScripts("/__/firebase/init.js");
 
-
-importScripts("https://www.gstatic.com/firebasejs/5.7.1/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/5.7.1/firebase-messaging.js");
-var config = {
-  apiKey: "AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg",
-  authDomain: "gcmproject-141802.firebaseapp.com",
-  databaseURL: "https://gcmproject-141802.firebaseio.com",
-  projectId: "gcmproject-141802",
-  storageBucket: "gcmproject-141802.appspot.com",
-  messagingSenderId: "961587936477"
-};
-firebase.initializeApp(config);
-var messaging = firebase.messaging();
 
 
 self.addEventListener("push", function(event) {

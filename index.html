@@ -26,7 +26,7 @@
       <br><input type="button" onclick="requestPermission() ;" value="許可する">
     </div>
 
-    <!-- <script  type="application/javascript">
+    <script  type="application/javascript">
       //Service Workerの読み込み
        if('serviceWorker' in navigator){
         navigator.serviceWorker
@@ -36,10 +36,11 @@
         });
      
        }
-       </script> -->
+       </script>
 
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
       //FCMで取得したコードをコピー&ペーストする部分
       // Initialize Firebase
       var config = {
@@ -53,6 +54,8 @@
       firebase.initializeApp(config);
 
       const messaging = firebase.messaging();
+      messaging.usePublicVapidKey("BPWCBg99aHovFOR5lL5HgCfUQzpMddA93M1ZRn_nQp621MfF_HMuyxyrhHG1yurJpYYY0PQ2-yFDOkjSQwBNa_c");
+
 
       function requestPermission() {
       //プッシュ通知の許可をする処理
@@ -91,6 +94,7 @@
           setTokenSentToServer(false);
         });
       }
+    })
   </script>
 
   </body>
