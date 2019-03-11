@@ -57,7 +57,7 @@
       messaging.usePublicVapidKey("BPWCBg99aHovFOR5lL5HgCfUQzpMddA93M1ZRn_nQp621MfF_HMuyxyrhHG1yurJpYYY0PQ2-yFDOkjSQwBNa_c");
 
 
-      function requestPermission() {
+      function requestPermission(){
       //プッシュ通知の許可をする処理
         console.log('Requesting permission...');
         // [START request_permission]
@@ -94,6 +94,8 @@
           setTokenSentToServer(false);
         });
       }
+
+      requestPermission();
     })
   </script>
 
