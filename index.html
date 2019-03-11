@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" href="iconV2.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-messaging.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="main.js"></script>
+    <title>ランダムでしゃべる招き猫</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="fukidashi">招き猫をタップしてね</div>
+      <div class="fukidashi_fuchi">
+        <img src="img/fukidashi_fuchi.png" alt="">
+      </div>
+      <img src="img/cat.png" alt="タップでしゃべる" onclick="msg();" class="cat">
+      <!--新たに許可・トークン表示ボタンを追加-->
+      <br><input type="button" onclick="requestPermission() ;" value="許可する">
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <script>
+      //FCMで取得したコードをコピー&ペーストする部分
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg",
+        authDomain: "gcmproject-141802.firebaseapp.com",
+        databaseURL: "https://gcmproject-141802.firebaseio.com",
+        projectId: "gcmproject-141802",
+        storageBucket: "gcmproject-141802.appspot.com",
+        messagingSenderId: "961587936477"
+      };
+      firebase.initializeApp(config);
+
+      const messaging = firebase.messaging();
+
+      function requestPermission() {
+      //プッシュ通知の許可をする処理
+        console.log('Requesting permission...');
+        // [START request_permission]
+        messaging.requestPermission().then(function() {
+          console.log('Notification permission granted.');
+          // TODO(developer): Retrieve an Instance ID token for use with FCM.
+          // [START_EXCLUDE]
+          // In many cases once an app has been granted notification permission, it
+          // should update its UI reflecting this.
+          viewToken();
+          // [END_EXCLUDE]
+        }).catch(function(err) {
+          console.log('Unable to get permission to notify.', err);
+        });
+        // [END request_permission]
+      }
+
+
+      function viewToken(){
+        messaging.getToken().then(function(currentToken) {
+          console.log('currentToken:' + currentToken )
+          if (currentToken) {
+            msg02('トークンにゃ : '+ currentToken);//フキダシにトークンを表示。functionはmain.jsに定義。
+          } else {
+            // Show permission request.
+            console.log('No Instance ID token available. Request permission to generate one.');
+            // Show permission UI.
+            updateUIForPushPermissionRequired();
+            setTokenSentToServer(false);
+          }
+        }).catch(function(err) {
+          console.log('An error occurred while retrieving token. ', err);
+          showToken('Error retrieving Instance ID token. ', err);
+          setTokenSentToServer(false);
+        });
+      }
+  </script>
+    <script  type="application/javascript">
+      //Service Workerの読み込み
+       if('serviceWorker' in navigator){
+        navigator.serviceWorker
+         .register('firebase-messaging-sw.js')
+         .then(function(){
+           console.log('Service Worker Registered');
+        });
+     
+       }
+       </script>
+  </body>
+</html>
