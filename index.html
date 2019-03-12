@@ -11,6 +11,7 @@
     <link rel="manifest" href="manifest.json">
     <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-firestore.js"></script>
     <script src="jquery.min.js"></script>
     <script src="main.js"></script>
     <title>トークン招き猫</title>
@@ -23,7 +24,6 @@
         <img src="img/fukidashi_fuchi.png" alt="">
       </div>
       <img src="img/cat.png" alt="タップでしゃべる" class="cat">
-      <!--新たに許可・トークン表示ボタンを追加-->
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
@@ -39,6 +39,7 @@
       };
       firebase.initializeApp(config);
       const messaging = firebase.messaging();
+      const db = firebase.firestore();
       messaging.usePublicVapidKey("BPWCBg99aHovFOR5lL5HgCfUQzpMddA93M1ZRn_nQp621MfF_HMuyxyrhHG1yurJpYYY0PQ2-yFDOkjSQwBNa_c");
 
       /* ServiceWorker */
@@ -51,6 +52,16 @@
             messaging.getToken().then(token => {
                 console.log(token);
                 msg02('トークンにゃ :\n '+ token);
+                // トークン格納
+                db.collection("tokens").add({
+                  token: token
+                })
+                .then(function(docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });
             });
           });
         }).catch(error => {
