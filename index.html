@@ -41,8 +41,6 @@
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-      //FCMで取得したコードをコピー&ペーストする部分
-      // Initialize Firebase
       var config = {
         apiKey: "AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg",
         authDomain: "gcmproject-141802.firebaseapp.com",
@@ -52,22 +50,25 @@
         messagingSenderId: "961587936477"
       };
       firebase.initializeApp(config);
-
       const messaging = firebase.messaging();
       messaging.usePublicVapidKey("BPWCBg99aHovFOR5lL5HgCfUQzpMddA93M1ZRn_nQp621MfF_HMuyxyrhHG1yurJpYYY0PQ2-yFDOkjSQwBNa_c");
-      messaging.requestPermission();
-      var serviceWorker = navigator.serviceWorker;
-      serviceWorker.register('firebase-messaging-sw.js').then(() => {
-          return serviceWorker.ready;
-      }).then(regist => {
-          messaging.useServiceWorker(regist);
+
+      /* ServiceWorker */
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./firebase-messaging-sw.js').then(registration => {
+          console.log(registration);
+          messaging.useServiceWorker(registration);
           messaging.requestPermission().then(() => {
               messaging.getToken().then(token => {
                   console.log(token);
               });
           });
-      });
+        }).catch(error => {
+          console.error(error);
+        });
+      }
 
+    })
       // function requestPermission(){
       // //プッシュ通知の許可をする処理
       //   console.log('Requesting permission...');
@@ -107,7 +108,7 @@
       // }
 
       // requestPermission();
-    })
+
   </script>
 
   </body>
