@@ -40,9 +40,9 @@
       firebase.initializeApp(config);
       const messaging = firebase.messaging();
 
-      const firestore = firebase.firestore();
+      const db = firebase.firestore();
       const settings = {/* your settings... */ timestampsInSnapshots: true};    // コンソールに表示されたエラー内にこれを記述しろとあったので２行を追加
-      firestore.settings(settings);
+      db.settings(settings);
       messaging.usePublicVapidKey("BPWCBg99aHovFOR5lL5HgCfUQzpMddA93M1ZRn_nQp621MfF_HMuyxyrhHG1yurJpYYY0PQ2-yFDOkjSQwBNa_c");
 
       /* ServiceWorker */
