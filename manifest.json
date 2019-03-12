@@ -9,7 +9,7 @@
         "type": "image/png"
     }
   ],
-  "start_url": " https://github.com/kingstonelibrary/PWA_token.git",
+  "start_url": "https://kingstonelibrary.github.io/PWA_token/",
   "display": "standalone",
   "gcm_sender_id": "103953800507"
 }
