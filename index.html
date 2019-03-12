@@ -17,26 +17,13 @@
   </head>
   <body>
     <div class="container">
-      <div class="fukidashi">招き猫をタップしてね</div>
+      <div class="fukidashi">トークンです</div>
       <div class="fukidashi_fuchi">
         <img src="img/fukidashi_fuchi.png" alt="">
       </div>
-      <img src="img/cat.png" alt="タップでしゃべる" onclick="msg02();" class="cat">
+      <img src="img/cat.png" alt="タップでしゃべる" class="cat">
       <!--新たに許可・トークン表示ボタンを追加-->
-      <br><input type="button" onclick="requestPermission();" value="許可する">
     </div>
-
-    <!-- <script  type="application/javascript">
-      //Service Workerの読み込み
-       if('serviceWorker' in navigator){
-        navigator.serviceWorker
-         .register('firebase-messaging-sw.js')
-         .then(function(){
-           console.log('Service Worker Registered');
-        });
-     
-       }
-       </script> -->
 
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
     <script>
@@ -56,12 +43,14 @@
       /* ServiceWorker */
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./firebase-messaging-sw.js').then(registration => {
-          console.log(registration);
+          console.log('SW registered');
           messaging.useServiceWorker(registration);
           messaging.requestPermission().then(() => {
-              messaging.getToken().then(token => {
-                  console.log(token);
-              });
+            console.log('permission granted');
+            messaging.getToken().then(token => {
+                console.log(token);
+                msg02('トークンにゃ :\n '+ token);
+            });
           });
         }).catch(error => {
           console.error(error);
