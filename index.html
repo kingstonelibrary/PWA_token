@@ -68,8 +68,8 @@
                 // トークンをトピックに登録
                 var xhr = new XMLHttpRequest(); 
                 xhr.open('POST', 'https://iid.googleapis.com/iid/v1/'+ token +'/rel/topics/SLC');
-                xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
-                xhr.setRequestHeader('Authorization', 'key=AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg');
+                xhr.setRequestHeader('content-type', 'application/json');
+                xhr.setRequestHeader('Authorization', 'key=\'AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg\'');
                 xhr.send();
                 xhr.onreadystatechange = function() {
                   if(xhr.readyState === 4 && xhr.status === 200) {
