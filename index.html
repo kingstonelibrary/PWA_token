@@ -71,6 +71,13 @@
                 xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
                 xhr.setRequestHeader('Authorization', 'key=AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg');
                 xhr.send();
+                xhr.onreadystatechange = function() {
+                  if(xhr.readyState === 4 && xhr.status === 200) {
+                    console.log( xhr.responseText );
+                  }else{
+                    console.log(' xhr error')
+                  }
+                }
             });
           });
         }).catch(error => {
