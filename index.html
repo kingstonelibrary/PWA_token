@@ -124,47 +124,21 @@
         }).catch(error => {
           console.error(error);
         });
-      }
-    })
-      // function requestPermission(){
-      // //プッシュ通知の許可をする処理
-      //   console.log('Requesting permission...');
-      //   // [START request_permission]
-      //   messaging.requestPermission().then(function() {
-      //     console.log('Notification permission granted.');
-      //     // TODO(developer): Retrieve an Instance ID token for use with FCM.
-      //     // [START_EXCLUDE]
-      //     // In many cases once an app has been granted notification permission, it
-      //     // should update its UI reflecting this.
-      //     viewToken();
-      //     // [END_EXCLUDE]
-      //   }).catch(function(err) {
-      //     console.log('Unable to get permission to notify.', err);
-      //   });
-      //   // [END request_permission]
-      // }
+      } // end of SW registration
 
+      messaging.onMessage(function(payload) {           // ウェブアプリがフォアグラウンドの場合のメッセージ処理
+        console.log('Message received. ', payload);
+        // ...
+      });
 
-      // function viewToken(){
-      //   messaging.getToken().then(function(currentToken) {
-      //     console.log('currentToken:' + currentToken )
-      //     if (currentToken) {
-      //       msg02('トークンにゃ : '+ currentToken);//フキダシにトークンを表示。functionはmain.jsに定義。
-      //     } else {
-      //       // Show permission request.
-      //       console.log('No Instance ID token available. Request permission to generate one.');
-      //       // Show permission UI.
-      //       updateUIForPushPermissionRequired();
-      //       setTokenSentToServer(false);
-      //     }
-      //   }).catch(function(err) {
-      //     console.log('An error occurred while retrieving token. ', err);
-      //     showToken('Error retrieving Instance ID token. ', err);
-      //     setTokenSentToServer(false);
-      //   });
-      // }
-
-      // requestPermission();
+      /* 
+        アプリがバックグラウンドで動作中の場合
+        そのようなときになんらかのメッセージを受信すると、ブラウザ内の表示通知がトリガーされます。
+        この通知に関するオプション（タイトルやクリック アクションなど）は、
+        「アプリサーバーからの送信リクエスト」または「クライアント上の Service Worker ロジック」で指定できます。
+          → self.addEventListener("push", function(event) { ... のこと (firebase-messaging-sw.js)
+      */
+    }) // end of 'DOMContentLoaded' event handler
 
   </script>
 
