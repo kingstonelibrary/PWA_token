@@ -68,7 +68,7 @@
                 // トークンをトピックに登録
                 var xhr = new XMLHttpRequest(); 
                 var url = 'https://iid.googleapis.com/iid/v1/' + token + '/rel/topics/slc';
-                console.log(url);
+                // console.log(url);
                 xhr.open('POST', url);
                 xhr.setRequestHeader('content-type', 'application/json');
                 xhr.setRequestHeader('Authorization', 'key=AAAA3-MbfN0:APA91bGtlCrxRI-_F6tEZOAW-ebhX5_39F3DiAnwK7wRlsL9dd7bWylNtc3AhzQmaNVVJnLcX2D1l7wVEGjyk1yn3gfKQwW57uJ7Qq7DQzfUJ67zeSeK5cjuEBBRK9SZRZTuDTyzrxUF');
@@ -85,16 +85,36 @@
             });
           });
 
-          // Callback fired if Instance ID token is updated.
-          messaging.onTokenRefresh(function() {
+          messaging.onTokenRefresh(function() {                       // トークン更新で呼ばれるハンドラでDBとトピックにと王録し直す
             messaging.getToken().then(function(refreshedToken) {
               console.log('Token refreshed.');
-              // Indicate that the new Instance ID token has not yet been sent to the
-              // app server.
-              // setTokenSentToServer(false);
-              // Send Instance ID token to app server.
-              // sendTokenToServer(refreshedToken);
-              // ...
+                // トークン格納
+                db.collection("tokens").add({
+                  token: refreshedToken
+                })
+                .then(function(docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });
+              // トークンをトピックに登録
+              var xhr = new XMLHttpRequest(); 
+              var url = 'https://iid.googleapis.com/iid/v1/' + refreshedToken + '/rel/topics/slc';
+              // console.log(url);
+              xhr.open('POST', url);
+              xhr.setRequestHeader('content-type', 'application/json');
+              xhr.setRequestHeader('Authorization', 'key=AAAA3-MbfN0:APA91bGtlCrxRI-_F6tEZOAW-ebhX5_39F3DiAnwK7wRlsL9dd7bWylNtc3AhzQmaNVVJnLcX2D1l7wVEGjyk1yn3gfKQwW57uJ7Qq7DQzfUJ67zeSeK5cjuEBBRK9SZRZTuDTyzrxUF');
+              xhr.send();
+              xhr.onreadystatechange = function() {
+                console.log( xhr.responseText );
+                // console.log('xhr.readyState:' + xhr.readyState)
+                // if(xhr.readyState === 4 || xhr.status === 2 || xhr.status === 3) {
+                //   console.log( xhr.responseText );
+                // }else{
+                //   console.log(' xhr error')
+                // }
+              }
             }).catch(function(err) {
               console.log('Unable to retrieve refreshed token ', err);
               // showToken('Unable to retrieve refreshed token ', err);
