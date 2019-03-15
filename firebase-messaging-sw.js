@@ -84,6 +84,7 @@ self.addEventListener("push", function(event) {
   }
 });
 
+// 通知メッセージをクリックしたときの動作（対象ページを表示）
 self.addEventListener("notificationclick", function(event) {
   event.notification.close();
   event.waitUntil(
