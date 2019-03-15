@@ -53,10 +53,7 @@
           messaging.requestPermission().then(() => {
             console.log('permission granted');
             messaging.getToken().then(token => {
-                console.log(token);
-                sendTokenToServer(token);
-                updateUIForPushEnabled(token);
-
+                // console.log(token);
                 msg02('トークンにゃ :\n '+ token);
                 // トークン格納
                 db.collection("tokens").add({
