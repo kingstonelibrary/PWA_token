@@ -23,7 +23,7 @@
       <div class="fukidashi_fuchi">
         <img src="img/fukidashi_fuchi.png" alt="">
       </div>
-      <img src="img/cat.png" alt="タップでしゃべる" class="cat">
+      <img src="img/cat.png" alt="" class="cat">
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
@@ -43,7 +43,7 @@
       const db = firebase.firestore();
       const settings = {/* your settings... */ timestampsInSnapshots: true};    // コンソールに表示されたエラー内にこれを記述しろとあったので２行を追加
       db.settings(settings);
-      messaging.usePublicVapidKey("BPWCBg99aHovFOR5lL5HgCfUQzpMddA93M1ZRn_nQp621MfF_HMuyxyrhHG1yurJpYYY0PQ2-yFDOkjSQwBNa_c");
+      // messaging.usePublicVapidKey("BPWCBg99aHovFOR5lL5HgCfUQzpMddA93M1ZRn_nQp621MfF_HMuyxyrhHG1yurJpYYY0PQ2-yFDOkjSQwBNa_c");
 
       /* ServiceWorker */
       if ('serviceWorker' in navigator) {
