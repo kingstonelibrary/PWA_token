@@ -70,22 +70,16 @@
                 var url = 'https://iid.googleapis.com/iid/v1/' + token + '/rel/topics/slc';
                 // console.log(url);
                 xhr.open('POST', url);
-                xhr.setRequestHeader('content-type', 'application/json');
+                xhr.setRequestHeader('content-type', 'application/json');     // ↓ 以下は [クラウドメッセージング]-[サーバーキー]
                 xhr.setRequestHeader('Authorization', 'key=AAAA3-MbfN0:APA91bGtlCrxRI-_F6tEZOAW-ebhX5_39F3DiAnwK7wRlsL9dd7bWylNtc3AhzQmaNVVJnLcX2D1l7wVEGjyk1yn3gfKQwW57uJ7Qq7DQzfUJ67zeSeK5cjuEBBRK9SZRZTuDTyzrxUF');
                 xhr.send();
                 xhr.onreadystatechange = function() {
                   console.log( xhr.responseText );
-                  // console.log('xhr.readyState:' + xhr.readyState)
-                  // if(xhr.readyState === 4 || xhr.status === 2 || xhr.status === 3) {
-                  //   console.log( xhr.responseText );
-                  // }else{
-                  //   console.log(' xhr error')
-                  // }
                 }
             });
           });
 
-          messaging.onTokenRefresh(function() {                       // トークン更新で呼ばれるハンドラでDBとトピックにと王録し直す
+          messaging.onTokenRefresh(function() {                       // トークン更新で呼ばれるハンドラでDBとトピックにと登録し直す
             messaging.getToken().then(function(refreshedToken) {
               console.log('Token refreshed.');
                 // トークン格納
@@ -108,13 +102,7 @@
               xhr.send();
               xhr.onreadystatechange = function() {
                 console.log( xhr.responseText );
-                // console.log('xhr.readyState:' + xhr.readyState)
-                // if(xhr.readyState === 4 || xhr.status === 2 || xhr.status === 3) {
-                //   console.log( xhr.responseText );
-                // }else{
-                //   console.log(' xhr error')
-                // }
-              }
+               }
             }).catch(function(err) {
               console.log('Unable to retrieve refreshed token ', err);
               // showToken('Unable to retrieve refreshed token ', err);
